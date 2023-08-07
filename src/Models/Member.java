@@ -35,15 +35,20 @@ public class Member implements Models.interfaces.Member {
         return new ArrayList<>(historyChanges);
     }
 
-    public void addTask(Task task){
-        this.tasks.add(task);
+
+
+    @Override
+    public void addTask(Models.Tasks.Task task) {
+        this.tasks.add((Task) task);
     }
 
-    public void removeTask(Task task){
+    @Override
+    public void removeTask(Models.Tasks.Task task) {
         this.tasks.remove(task);
+
     }
 
-    public void addHistoryChange(String historyChange){
-        historyChanges.add(historyChange);
+    public void addHistory(String history){
+        historyChanges.add(history);
     }
 }
