@@ -43,11 +43,11 @@ public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
         this.assignee = assignee;
     }
 
-    public Status advanceBug(){
-        if(getStatus()==Status.ACTIVE){
+    public Status advanceBug() {
+        if (getStatus() == Status.ACTIVE) {
             setStatus(Status.FIXED);
             return getStatus();
-        }else{
+        } else {
             setStatus(Status.ACTIVE);
             return getStatus();
         }

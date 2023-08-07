@@ -4,7 +4,7 @@ import Models.Tasks.Interfaces.Task;
 
 import java.util.List;
 
-public interface Member {
+public interface Member extends Editor{
     String getName();
     List<Task> getTasks();
     List<String> getHistoryChanges();

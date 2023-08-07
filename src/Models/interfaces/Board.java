@@ -1,4 +1,10 @@
 package Models.interfaces;
 
-public interface Board {
+import java.util.List;
+
+public interface Board extends Editor {
+    String getName();
+
+    List<String> getHistory();
 }
+

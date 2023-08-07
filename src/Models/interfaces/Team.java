@@ -1,4 +1,4 @@
 package Models.interfaces;
 
-public interface Team {
+public interface Team extends Editor{
 }
