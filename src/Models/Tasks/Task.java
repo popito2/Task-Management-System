@@ -21,13 +21,11 @@ public class Task {
     private List<String> comments;
     private List<String> historyChanges;
 
-    public Task(int id, String title, String description, Status status, List<String> comments, List<String> historyChanges) {
+    public Task(int id, String title, String description, Status status ) {
         Id = id;
         setTitle(title);
         setDescription(description);
         this.status = status;
-        this.comments = comments;
-        this.historyChanges = historyChanges;
     }
 
     public int getId() {
@@ -61,7 +59,7 @@ public class Task {
         return status;
     }
 
-    private void setStatus(Status status) {
+    protected void setStatus(Status status) {
         this.status = status;
     }
 
