@@ -1,4 +1,4 @@
-package com.company.oop.dealership.utils;
+package Utils;
 
 import java.math.BigDecimal;
 
