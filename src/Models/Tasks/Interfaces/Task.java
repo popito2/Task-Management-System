@@ -1,4 +1,10 @@
 package Models.Tasks.Interfaces;
 
-public interface Task {
+import java.util.List;
+
+public interface Task extends Identifiable {
+    String getTitle();
+    String getDescription();
+    List<String> getComments();
+    List<String> getHistoryChanges();
 }

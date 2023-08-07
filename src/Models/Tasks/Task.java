@@ -2,6 +2,7 @@ package Models.Tasks;
 
 import ActivityHistory.History;
 import Models.Tasks.Enums.Status;
+import Utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Task {
     }
 
     private void setTitle(String title) {
-        com.company.oop.dealership.utils.ValidationHelpers.validateIntRange(title.length(), MIN_NAME_LENGHT,
+        ValidationHelpers.validateIntRange(title.length(), MIN_NAME_LENGHT,
                 MAX_NAME_LENGTH, NAME_ERROR);
         this.title = title;
     }
@@ -52,7 +53,7 @@ public class Task {
     }
 
     private void setDescription(String description) {
-        com.company.oop.dealership.utils.ValidationHelpers.validateIntRange(description.length(), DESCRIPTION_MIN,
+        ValidationHelpers.validateIntRange(description.length(), DESCRIPTION_MIN,
                 DESCRIPTION_MAX, DESCRIPTION_ERROR_MESSAGE);
     }
 
@@ -65,18 +66,18 @@ public class Task {
     }
 
     public List<String> getComments() {
-        return comments;
+        return new ArrayList<>(comments);
     }
 
-    private void setComments(List<String> comments) {
-        this.comments = comments;
+    public void addComment(String comment){
+        this.comments.add(comment);
     }
 
     public List<String> getHistoryChanges() {
-        return historyChanges;
+        return new ArrayList<>(historyChanges);
     }
 
-    private void setHistoryChanges(List<String> historyChanges) {
-        this.historyChanges = historyChanges;
+    public void addHistoryChange(String historyChange){
+        this.historyChanges.add(historyChange);
     }
 }
