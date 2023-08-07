@@ -1,4 +1,4 @@
-package com.company.oop.dealership.utils;
+package Utils;
 
 public class ParsingHelpers {
     public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
