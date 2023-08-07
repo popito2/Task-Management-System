@@ -1,4 +1,10 @@
 package Models.Tasks.Interfaces;
 
-public interface Story {
+import Models.Tasks.Enums.Priority;
+import Models.Tasks.Enums.Size;
+
+public interface Story extends Task{
+    Priority getPriority();
+    Size getSize();
+    String getAssignee();
 }
