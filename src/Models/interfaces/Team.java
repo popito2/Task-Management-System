@@ -1,4 +1,9 @@
 package Models.interfaces;
 
-public interface Team extends Editor{
+import java.util.List;
+
+public interface Team{
+    String getName();
+    List<Member> getMembers();
+    List<Models.interfaces.Board> getBoards();
 }
