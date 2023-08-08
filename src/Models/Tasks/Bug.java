@@ -13,9 +13,9 @@ public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
     private List<String> stepsToReproduce;
     private Priority priority;
     private Severity severity;
-    private Member assignee;
+    private String assignee;
 
-    public Bug(int id, String title, String description, Status status, List<String> stepsToReproduce, Priority priority, Severity severity, Member assignee) {
+    public Bug(int id, String title, String description, Status status, List<String> stepsToReproduce, Priority priority, Severity severity, String assignee) {
         super(id, title, description, status);
         this.assignee = assignee;
         this.priority = priority;
@@ -35,11 +35,11 @@ public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
         return severity;
     }
 
-    public Member getAssignee() {
+    public String getAssignee() {
         return assignee;
     }
 
-    private void setAssignee(Member assignee) {
+    private void setAssignee(String assignee) {
         this.assignee = assignee;
     }
 
