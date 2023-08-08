@@ -28,4 +28,5 @@ public interface TaskManagementRepository {
     Task findTaskById(int id);
     Team findTeamByName(String name);
     Models.interfaces.Member findMemberByName(String name);
+    Board findBoardByName(String name);
 }

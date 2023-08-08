@@ -1,6 +1,7 @@
 package Models;
 
 import Models.Tasks.Interfaces.Task;
+import Models.interfaces.Member;
 import Utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -63,4 +64,5 @@ public class Board implements Models.interfaces.Board {
 
 
     }
+
 }

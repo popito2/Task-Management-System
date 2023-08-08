@@ -29,8 +29,8 @@ public class CreateNewStory implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
         parseParameters(parameters);
-        Story createdstory = taskManagementRepository.createNewStory(title, description, priority, size, status, assignee);
-        return String.format("Task with ID %d was created.", createdstory.getId());
+        Story createdStory = taskManagementRepository.createNewStory(title, description, priority, size, status, assignee);
+        return String.format("Task with ID %d was created.", createdStory.getId());
     }
     private void parseParameters(List<String> parameters){
         title = parameters.get(0);

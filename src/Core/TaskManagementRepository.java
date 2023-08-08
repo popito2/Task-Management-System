@@ -20,6 +20,8 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
     private int nextId;
     private List<Team> teams = new ArrayList<Team>();
     private List<Task> tasks = new ArrayList<Task>();
+    private List<Board> boards = new ArrayList<Board>();
+
     private List<Models.interfaces.Member> members = new ArrayList<Models.interfaces.Member>();
 
     public TaskManagementRepository() {
@@ -103,6 +105,15 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
             }
         }
         throw new IllegalArgumentException("Member not found");
+    }
+
+    public Board findBoardByName(String name){
+        for (Board board : boards){
+            if(board.getName().equals(name)){
+                return board;
+            }
+        }
+        throw new IllegalArgumentException("Board not found");
     }
 
 }

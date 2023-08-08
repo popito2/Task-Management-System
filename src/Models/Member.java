@@ -37,7 +37,6 @@ public class Member implements Models.interfaces.Member {
 
 
 
-
     public void addTask(Task task) {
         this.tasks.add(task);
     }

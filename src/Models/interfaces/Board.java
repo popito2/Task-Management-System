@@ -6,5 +6,6 @@ public interface Board extends Editor {
     String getName();
 
     List<String> getHistory();
+
 }
 

@@ -7,6 +7,7 @@ import Utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowTeamsActivity implements Command {
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
     private List<List<String>> history;
     private String name;
     private TaskManagementRepository taskManagementRepository;
@@ -17,7 +18,7 @@ public class ShowTeamsActivity implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, 1);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
         history = getHistory(parameters);
         return history.toString();
     }

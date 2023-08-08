@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ShowPersonsActivity implements Command {
 
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
     private List<String> history;
     private String name;
     private TaskManagementRepository taskManagementRepository;
@@ -18,7 +19,7 @@ public class ShowPersonsActivity implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, 1);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
         history = getHistory(parameters);
         return history.toString();
     }
