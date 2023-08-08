@@ -7,7 +7,7 @@ import Models.Tasks.Enums.Status;
 
 import java.util.List;
 
-public interface Bug {
+public interface Bug extends Task{
     List<String> getStepsToReproduce();
     Priority getPriority();
     Severity getSeverity();
