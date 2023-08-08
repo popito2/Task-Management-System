@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
-    public static final int MIN_NAME_LENGHT = 10;
+    public static final int MIN_NAME_LENGTH = 10;
     public static final int MAX_NAME_LENGTH = 50;
     public static final String NAME_ERROR = "The name must be between 10 and 50 symbols.";
     public static final int DESCRIPTION_MIN = 10;
@@ -41,7 +41,7 @@ public class Task {
     }
 
     private void setTitle(String title) {
-        ValidationHelpers.validateIntRange(title.length(), MIN_NAME_LENGHT,
+        ValidationHelpers.validateIntRange(title.length(), MIN_NAME_LENGTH,
                 MAX_NAME_LENGTH, NAME_ERROR);
         this.title = title;
     }

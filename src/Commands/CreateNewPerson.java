@@ -26,6 +26,6 @@ public class CreateNewPerson implements Command {
 
         Member member = taskManagementRepository.createNewPerson(name);
 
-        return String.format("New membere %s has been created", member.getName());
+        return String.format("New member %s has been created", member.getName());
     }
 }

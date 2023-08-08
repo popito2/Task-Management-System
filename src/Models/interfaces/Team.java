@@ -10,5 +10,6 @@ public interface Team{
     void removeMember(Member member);
     void addBoard(Models.interfaces.Board board);
     void removeBoard(Board board);
+     List<List<String>> getHistory();
 
 }

@@ -37,9 +37,9 @@ public class Member implements Models.interfaces.Member {
 
 
 
-    @Override
-    public void addTask(Models.Tasks.Task task) {
-        this.tasks.add((Task) task);
+
+    public void addTask(Task task) {
+        this.tasks.add(task);
     }
 
     @Override

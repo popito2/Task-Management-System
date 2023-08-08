@@ -4,6 +4,7 @@ import Models.interfaces.Board;
 import Models.interfaces.Member;
 import Utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Team implements Models.interfaces.Team {
@@ -47,5 +48,13 @@ public class Team implements Models.interfaces.Team {
     }
     public void removeBoard(Board board){
         this.boards.remove(board);
+    }
+    public List<List<String>> getHistory(){
+        List<List<String>>teamHistory=new ArrayList<>();
+        for (Member member:members) {
+            teamHistory.add(member.getHistoryChanges());
+
+        }
+        return teamHistory;
     }
 }

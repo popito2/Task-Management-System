@@ -9,7 +9,7 @@ import java.util.List;
 public class Board implements Models.interfaces.Board {
     public static final int MIN_NAME_LENGTH = 5;
     public static final int MAX_NAME_LENGTH = 10;
-    public static final String NAME_ERROR_MESSAGE = "Name must be between 5 adn 10 symbols!";
+    public static final String NAME_ERROR_MESSAGE = "Name must be between 5 and 10 symbols!";
     private String name;
     private List<Task> tasks;
     private List<String> history;
