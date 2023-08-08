@@ -1,5 +1,5 @@
 package Models.Tasks.Interfaces;
 
-public interface Feedback {
+public interface Feedback extends Task{
     int getRating();
 }
