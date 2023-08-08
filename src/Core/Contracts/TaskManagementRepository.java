@@ -17,13 +17,15 @@ import java.util.List;
 public interface TaskManagementRepository {
     List<Team> getTeams();
     List<Task> getTasks();
+    List<Models.interfaces.Member> getMembers();
     Board createNewBoard(String name);
     Models.Tasks.Interfaces.Bug createNewBug(String title, String description, Status status, List<String> stepsToReproduce,
-                                             Priority priority, Severity severity, Member assignee);
+                                             Priority priority, Severity severity, String assignee);
     Models.Tasks.Interfaces.Feedback createNewFeedback(String title, String description, Status status, int rating);
     Models.interfaces.Member createNewPerson(String name);
     Story createNewStory(String title, String description, Priority priority, Size size, Status status, String assignee);
     Team createNewTeam(String name);
     Task findTaskById(int id);
     Team findTeamByName(String name);
+    Models.interfaces.Member findMemberByName(String name);
 }

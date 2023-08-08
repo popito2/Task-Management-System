@@ -11,6 +11,6 @@ public interface Bug extends Task{
     List<String> getStepsToReproduce();
     Priority getPriority();
     Severity getSeverity();
-    Member getAssignee();
+    String getAssignee();
     Status advanceBug();
 }

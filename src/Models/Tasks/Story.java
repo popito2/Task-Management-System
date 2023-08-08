@@ -10,7 +10,7 @@ public class Story extends Task implements Models.Tasks.Interfaces.Story {
     private Priority priority;
     private Size size;
     private String assignee;
-    public Story(int id, String title, String description, Priority priority, Size size, Status status,String assignee) {
+    public Story(int id, String title, String description, Priority priority, Size size, Status status, String assignee) {
         super(id, title, description, status);
         setAssignee(assignee);
         setPriority(priority);
@@ -40,9 +40,10 @@ public class Story extends Task implements Models.Tasks.Interfaces.Story {
     private void setAssignee(String assignee) {
         this.assignee = assignee;
     }
-    public void advanceStoryStatus(){
-        switch(getStatus()){
-            case NOT_DONE :
+
+    public void advanceStoryStatus() {
+        switch (getStatus()) {
+            case NOT_DONE:
                 setStatus(Status.IN_PROGRESS);
                 break;
             case IN_PROGRESS:
@@ -50,9 +51,10 @@ public class Story extends Task implements Models.Tasks.Interfaces.Story {
                 break;
         }
     }
-    public void reverseStoryStatus(){
-        switch(getStatus()){
-            case DONE :
+
+    public void reverseStoryStatus() {
+        switch (getStatus()) {
+            case DONE:
                 setStatus(Status.IN_PROGRESS);
                 break;
             case IN_PROGRESS:

@@ -1,5 +1,7 @@
 package Core;
 
+import Commands.Contracts.Command;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,17 +10,17 @@ import java.util.Scanner;
 public class TaskManagementEngine {
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
-    private static final String MAIN_SPLIT_SYMBOL = " ";
+    private static final String MAIN_SPLIT_SYMBOL = ", ";
     private static final String COMMENT_OPEN_SYMBOL = "{{";
     private static final String COMMENT_CLOSE_SYMBOL = "}}";
     private static final String REPORT_SEPARATOR = "####################";
 
-    private final CommandFactory commandFactory;
-    private final VehicleDealershipRepository vehicleDealershipRepository;
+    private final Core.Contracts.CommandFactory commandFactory;
+    private final Core.Contracts.TaskManagementRepository taskManagementRepository;
 
-    public VehicleDealershipEngineImpl() {
-        this.commandFactory = new CommandFactoryImpl();
-        this.vehicleDealershipRepository = new VehicleDealershipRepositoryImpl();
+    public TaskManagementEngine() {
+        this.commandFactory = new CommandFactory();
+        this.taskManagementRepository = new TaskManagementRepository();
     }
 
     public void start() {
@@ -47,7 +49,7 @@ public class TaskManagementEngine {
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
         List<String> parameters = extractCommandParameters(inputLine);
-        Command command = commandFactory.createCommandFromCommandName(commandName, vehicleDealershipRepository);
+        Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
         String executionResult = command.execute(parameters);
         print(executionResult);
     }

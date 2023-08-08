@@ -16,8 +16,6 @@ public class Board implements Models.interfaces.Board {
 
     public Board(String name) {
         this.name = name;
-        this.tasks = new ArrayList<>();
-        this.history = new ArrayList<>();
     }
 
 
@@ -29,25 +27,17 @@ public class Board implements Models.interfaces.Board {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MIN_NAME_LENGTH, MAX_NAME_LENGTH, NAME_ERROR_MESSAGE);
         this.name = name;
     }
 
     public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+        return new ArrayList<>(tasks);
     }
 
     public List<String> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<String> history) {
-        this.history = history;
+        return new ArrayList<>(history);
     }
 
     @Override

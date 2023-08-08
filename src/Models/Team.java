@@ -1,6 +1,7 @@
 package Models;
 
 import Models.interfaces.Board;
+import Models.interfaces.Member;
 import Utils.ValidationHelpers;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class Team implements Models.interfaces.Team {
         return boards;
     }
 
-    public void addMember(Member member){
+    public void addMember(Models.interfaces.Member member){
         this.members.add(member);
     }
     public void removeMember(Member member){

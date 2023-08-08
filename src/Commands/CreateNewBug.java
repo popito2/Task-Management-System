@@ -1,4 +1,51 @@
 package Commands;
 
-public class CreateNewBug {
+import Commands.Contracts.Command;
+import Core.Contracts.TaskManagementRepository;
+import Models.Member;
+import Models.Tasks.Enums.Priority;
+import Models.Tasks.Enums.Severity;
+import Models.Tasks.Enums.Status;
+import Models.Tasks.Interfaces.Bug;
+import Utils.ParsingHelpers;
+import Utils.ValidationHelpers;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class CreateNewBug implements Command {
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
+    private TaskManagementRepository taskManagementRepository;
+
+    private String title;
+    private String description;
+    private Status status;
+    private List<String> stepsToReproduce;
+    private Priority priority;
+    private Severity severity;
+    private String assignee;
+
+    public CreateNewBug(Core.Contracts.TaskManagementRepository taskManagementRepository) {
+        this.taskManagementRepository = taskManagementRepository;
+    }
+
+    public String execute(List<String> parameters){
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        parseParameters(parameters);
+
+        Bug createdBug = taskManagementRepository.createNewBug(title, description, status, stepsToReproduce, priority, severity, assignee);
+
+        return String.format("Task with ID %d was created.", createdBug.getId());
+    }
+
+    private void parseParameters(List<String> parameters) {
+        title = parameters.get(0);
+        description = parameters.get(1);
+        status = ParsingHelpers.tryParseEnum(parameters.get(2), Status.class);
+        stepsToReproduce = Arrays.asList(parameters.get(3).split(","));
+        priority = ParsingHelpers.tryParseEnum(parameters.get(4), Priority.class);
+        severity = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
+        assignee = parameters.get(6);
+    }
 }
