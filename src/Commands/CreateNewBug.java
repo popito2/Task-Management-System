@@ -14,13 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CreateNewBug implements Command {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
     private TaskManagementRepository taskManagementRepository;
 
     private String title;
     private String description;
     private Status status;
-    private List<String> stepsToReproduce;
     private Priority priority;
     private Severity severity;
     private String assignee;
@@ -34,18 +33,16 @@ public class CreateNewBug implements Command {
 
         parseParameters(parameters);
 
-        Bug createdBug = taskManagementRepository.createNewBug(title, description, status, stepsToReproduce, priority, severity, assignee);
+        Bug createdBug = taskManagementRepository.createNewBug(title, description, status, priority, severity);
 
         return String.format("Task with ID %d was created.", createdBug.getId());
     }
 
     private void parseParameters(List<String> parameters) {
-        title = parameters.get(0);
-        description = parameters.get(1);
+        title = parameters.get(1);
+        description = parameters.get(0);
         status = ParsingHelpers.tryParseEnum(parameters.get(2), Status.class);
-        stepsToReproduce = Arrays.asList(parameters.get(3).split(","));
-        priority = ParsingHelpers.tryParseEnum(parameters.get(4), Priority.class);
-        severity = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
-        assignee = parameters.get(6);
+        priority = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
+        severity = ParsingHelpers.tryParseEnum(parameters.get(4), Severity.class);
     }
 }

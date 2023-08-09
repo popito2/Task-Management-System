@@ -6,10 +6,11 @@ import Models.Tasks.Interfaces.Feedback;
 import Models.Tasks.Interfaces.Task;
 import Utils.ListingHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllFeedbacks implements Command {
-    private List<Feedback> feedbackList;
+    private List<Feedback> feedbackList = new ArrayList<>();
     private List<Task> tasks;
 
     public ListAllFeedbacks(TaskManagementRepository taskManagementRepository){

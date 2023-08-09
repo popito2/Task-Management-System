@@ -39,8 +39,8 @@ public class CreateNewFeedback implements Command {
     }
 
     private void parseParameters(List<String> parameters) {
-        title = parameters.get(0);
-        description = parameters.get(1);
+        title = parameters.get(1);
+        description = parameters.get(0);
         status = ParsingHelpers.tryParseEnum(parameters.get(2), Status.class);
         rating=Integer.parseInt(parameters.get(3));
 

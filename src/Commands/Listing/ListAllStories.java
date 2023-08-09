@@ -7,10 +7,11 @@ import Models.Tasks.Interfaces.Story;
 import Models.Tasks.Interfaces.Task;
 import Utils.ListingHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllStories implements Command {
-    private List<Story> stories;
+    private List<Story> stories = new ArrayList<>();
     private List<Task> tasks;
 
     public ListAllStories(TaskManagementRepository taskManagementRepository){
@@ -21,7 +22,7 @@ public class ListAllStories implements Command {
     @Override
     public String execute(List<String> parameters) {
         if(stories.isEmpty()){
-            return "There are no registered feedbacks.";
+            return "There are no registered stories.";
         }
 
         return ListingHelpers.elementsToString(getFeedbackFromTasks(tasks));

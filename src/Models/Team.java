@@ -12,8 +12,8 @@ public class Team implements Models.interfaces.Team {
     public static final int MAX_NAME_VALUE = 15;
     public static final String NAME_ERROR_LENGTH = "Name must be between 5 and 15 symbols.";
     String name;
-    private List<Models.interfaces.Member> members;
-    private List<Models.interfaces.Board> boards;
+    private List<Models.interfaces.Member> members = new ArrayList<>();
+    private List<Models.interfaces.Board> boards = new ArrayList<>();
 
     public Team(String name) {
         setName(name);

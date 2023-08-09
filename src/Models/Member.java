@@ -11,8 +11,8 @@ public class Member implements Models.interfaces.Member {
     public static final int NAME_MAX_LENGTH = 15;
     public static final String NAME_ERROR_MESSAGE = "Name should be between 5 and 15 symbols.";
     private String name;
-    private List<Task> tasks;
-    private List<String> historyChanges;
+    private List<Task> tasks = new ArrayList<>();
+    private List<String> historyChanges = new ArrayList<>();
 
     public Member(String name) {
         setName(name);
@@ -36,9 +36,9 @@ public class Member implements Models.interfaces.Member {
     }
 
 
-
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    @Override
+    public void addTask(Models.Tasks.Task task) {
+        this.tasks.add((Task) task);
     }
 
     @Override

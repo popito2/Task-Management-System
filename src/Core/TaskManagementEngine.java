@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TaskManagementEngine {
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
-    private static final String MAIN_SPLIT_SYMBOL = ", ";
+    private static final String MAIN_SPLIT_SYMBOL = " ";
     private static final String COMMENT_OPEN_SYMBOL = "{{";
     private static final String COMMENT_CLOSE_SYMBOL = "}}";
     private static final String REPORT_SEPARATOR = "####################";

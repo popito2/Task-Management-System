@@ -13,4 +13,5 @@ public interface Bug extends Task{
     Severity getSeverity();
     String getAssignee();
     Status advanceBug();
+    void addListOfSteps(String step);
 }

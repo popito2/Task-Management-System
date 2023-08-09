@@ -20,8 +20,7 @@ public class ShowAllTheTeamMembers implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
-        Team team = getTeam(parameters);
-        return team.getMembers().toString();
+        return getTeam(parameters).getMembers().toString();
     }
     private Team getTeam(List<String>parameters){
         name=parameters.get(0);
