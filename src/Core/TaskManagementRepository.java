@@ -44,9 +44,9 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
         return new Models.Board(name);
     }
 
-    public Models.Tasks.Interfaces.Bug createNewBug(String title, String description, Status status, List<String> stepsToReproduce,
-                                                    Priority priority, Severity severity, String assignee) {
-        Models.Tasks.Interfaces.Bug bug = new Bug(++nextId, title, description, status, stepsToReproduce, priority, severity, assignee);
+    public Models.Tasks.Interfaces.Bug createNewBug(String title, String description, Status status,
+                                                    Priority priority, Severity severity) {
+        Models.Tasks.Interfaces.Bug bug = new Bug(++nextId, title, description, status, priority, severity );
         tasks.add(bug);
         return bug;
     }
@@ -64,8 +64,8 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
         return member;
     }
 
-    public Story createNewStory(String title, String description, Priority priority, Size size, Status status, String assignee) {
-        Story story = new Models.Tasks.Story(++nextId, title, description, priority, size, status, assignee);
+    public Story createNewStory(String title, String description, Priority priority, Size size, Status status) {
+        Story story = new Models.Tasks.Story(++nextId, title, description, priority, size, status);
         tasks.add(story);
         return story;
     }

@@ -10,16 +10,14 @@ import java.util.List;
 
 public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
 
-    private List<String> stepsToReproduce;
+    private List<String> stepsToReproduce = new ArrayList<>();
     private Priority priority;
     private Severity severity;
     private String assignee;
 
-    public Bug(int id, String title, String description, Status status, List<String> stepsToReproduce, Priority priority, Severity severity, String assignee) {
+    public Bug(int id, String title, String description, Status status, Priority priority, Severity severity) {
         super(id, title, description, status);
-        this.assignee = assignee;
         this.priority = priority;
-        this.stepsToReproduce = stepsToReproduce;
         this.severity = severity;
     }
 
@@ -51,5 +49,9 @@ public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
             setStatus(Status.ACTIVE);
             return getStatus();
         }
+    }
+
+    public void addListOfSteps(String step){
+        stepsToReproduce.add(step);
     }
 }

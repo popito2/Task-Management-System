@@ -7,10 +7,11 @@ import Models.Tasks.Interfaces.Feedback;
 import Models.Tasks.Interfaces.Task;
 import Utils.ListingHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllBugs implements Command {
-    private List<Bug> bugs;
+    private List<Bug> bugs = new ArrayList<>();
     private List<Task> tasks;
 
     public ListAllBugs(TaskManagementRepository taskManagementRepository){
@@ -21,7 +22,7 @@ public class ListAllBugs implements Command {
     @Override
     public String execute(List<String> parameters) {
         if(bugs.isEmpty()){
-            return "There are no registered feedbacks.";
+            return "There are no registered bugs.";
         }
 
         return ListingHelpers.elementsToString(getFeedbackFromTasks(tasks));

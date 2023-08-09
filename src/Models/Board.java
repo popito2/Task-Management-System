@@ -12,8 +12,8 @@ public class Board implements Models.interfaces.Board {
     public static final int MAX_NAME_LENGTH = 10;
     public static final String NAME_ERROR_MESSAGE = "Name must be between 5 and 10 symbols!";
     private String name;
-    private List<Task> tasks;
-    private List<String> history;
+    private List<Task> tasks = new ArrayList<>();
+    private List<String> history = new ArrayList<>();
 
     public Board(String name) {
         this.name = name;

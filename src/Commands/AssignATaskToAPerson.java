@@ -29,7 +29,7 @@ public class AssignATaskToAPerson implements Command {
 
         Member member = getMember(parameters);
 
-        member.addTask(task);
+        member.addTask((Models.Tasks.Task) task);
 
         return String.format("%s has been added to team %s", memberName, taskId);
     }

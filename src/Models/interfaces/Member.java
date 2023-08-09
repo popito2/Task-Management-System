@@ -8,5 +8,4 @@ public interface Member extends Editor{
     String getName();
     List<Task> getTasks();
     List<String> getHistoryChanges();
-    void addTask(Task task);
 }

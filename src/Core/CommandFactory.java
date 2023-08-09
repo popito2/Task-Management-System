@@ -54,6 +54,8 @@ public class CommandFactory implements Core.Contracts.CommandFactory {
                 return new ListAllTasks(taskManagementRepository);
             case LISTALLTASKSWITHASSIGNEE:
                 return new ListAllTasksWithAssignee(taskManagementRepository);
+            case ADDSTEPSTOBUG:
+                return new AddStepsToABug(taskManagementRepository);
             default:
                 throw new IllegalArgumentException("Command you tried to use is non existend");
         }

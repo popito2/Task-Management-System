@@ -10,9 +10,8 @@ public class Story extends Task implements Models.Tasks.Interfaces.Story {
     private Priority priority;
     private Size size;
     private String assignee;
-    public Story(int id, String title, String description, Priority priority, Size size, Status status, String assignee) {
+    public Story(int id, String title, String description, Priority priority, Size size, Status status) {
         super(id, title, description, status);
-        setAssignee(assignee);
         setPriority(priority);
         setSize(size);
     }

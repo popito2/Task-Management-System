@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ListAllTasks implements Command {
     private List<Task> tasks;
-
     public ListAllTasks(TaskManagementRepository taskManagementRepository) {
         this.tasks = taskManagementRepository.getTasks();
     }
