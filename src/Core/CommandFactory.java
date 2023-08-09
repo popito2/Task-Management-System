@@ -3,6 +3,7 @@ package Core;
 import Commands.*;
 import Commands.Contracts.Command;
 import Commands.Enums.CommandType;
+import Commands.Listing.*;
 import Core.Contracts.TaskManagementRepository;
 import Utils.ParsingHelpers;
 
@@ -43,6 +44,16 @@ public class CommandFactory implements Core.Contracts.CommandFactory {
                 return new ShowTeamsActivity(taskManagementRepository);
             case SHOWWALLTEAMBOARDS:
                 return new ShowAllTeamBoards(taskManagementRepository);
+            case LISTALLBUGS:
+                return new ListAllBugs(taskManagementRepository);
+            case LISTALLFEEDBACKS:
+                return new ListAllFeedbacks(taskManagementRepository);
+            case LISTALLSTORIES:
+                return new ListAllStories(taskManagementRepository);
+            case LISTALLTASKS:
+                return new ListAllTasks(taskManagementRepository);
+            case LISTALLTASKSWITHASSIGNEE:
+                return new ListAllTasksWithAssignee(taskManagementRepository);
             default:
                 throw new IllegalArgumentException("Command you tried to use is non existend");
         }
