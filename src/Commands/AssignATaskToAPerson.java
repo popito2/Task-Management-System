@@ -2,6 +2,7 @@ package Commands;
 
 import Commands.Contracts.Command;
 import Core.Contracts.TaskManagementRepository;
+import Models.Tasks.Interfaces.Bug;
 import Models.Tasks.Interfaces.Task;
 import Models.Team;
 import Models.interfaces.Member;
@@ -30,6 +31,10 @@ public class AssignATaskToAPerson implements Command {
         Member member = getMember(parameters);
 
         member.addTask((Models.Tasks.Task) task);
+
+        Bug bug = (Bug) taskManagementRepository.findTaskById( ParsingHelpers.tryParseInt(parameters.get(0),"id"));
+
+        bug.setAssignee(memberName);
 
         return String.format("%s has been added to team %s", memberName, taskId);
     }

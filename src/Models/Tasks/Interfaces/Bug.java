@@ -14,4 +14,5 @@ public interface Bug extends Task{
     String getAssignee();
     Status advanceBug();
     void addListOfSteps(String step);
+    void setAssignee(String assignee);
 }

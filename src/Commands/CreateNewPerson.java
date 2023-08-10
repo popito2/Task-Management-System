@@ -20,7 +20,9 @@ public class CreateNewPerson implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
+        if(parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS){
+            throw new IllegalArgumentException("Parameters count has to be 1");
+        }
 
         name = parameters.get(0);
 

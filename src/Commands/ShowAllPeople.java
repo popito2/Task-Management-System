@@ -21,7 +21,9 @@ public class ShowAllPeople implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
+        if(parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS){
+            throw new IllegalArgumentException("Number of parameters should be 0");
+        }
         List<String> memberNames = new ArrayList<>();
         if(members.isEmpty()){
             return "There are no listed members";
