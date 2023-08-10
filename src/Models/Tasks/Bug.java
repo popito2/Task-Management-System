@@ -37,7 +37,7 @@ public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
         return assignee;
     }
 
-    private void setAssignee(String assignee) {
+    public void setAssignee(String assignee){
         this.assignee = assignee;
     }
 

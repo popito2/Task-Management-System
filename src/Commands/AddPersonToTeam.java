@@ -21,7 +21,9 @@ public class AddPersonToTeam implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
+        if(parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS){
+            throw new IllegalArgumentException("Number of parameters should be 2");
+        }
 
         Models.interfaces.Team team = getTeam(parameters);
         Member member = getMember(parameters);
