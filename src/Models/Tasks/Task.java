@@ -53,6 +53,7 @@ public class Task {
     private void setDescription(String description) {
         ValidationHelpers.validateIntRange(description.length(), DESCRIPTION_MIN,
                 DESCRIPTION_MAX, DESCRIPTION_ERROR_MESSAGE);
+        this.description= description;
     }
 
     public Status getStatus() {
