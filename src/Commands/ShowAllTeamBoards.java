@@ -20,10 +20,9 @@ public class ShowAllTeamBoards implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
-        return getTeam(parameters).getBoards().toString();
+        name = parameters.get(0);
+        Team team = taskManagementRepository.findTeamByName(name);
+        return team.getBoards().toString();
     }
-    private Team getTeam(List<String>parameters){
-        name=parameters.get(0);
-        return taskManagementRepository.findTeamByName(name);
-    }
+
 }
