@@ -31,7 +31,7 @@ public class ShowPersonsActivityTests {
     }
 
     @Test
-    public void should_ShowPersonsActiviti_When_ArgumentsAreValid(){
+    public void should_ShowPersonsActivity_When_ArgumentsAreValid(){
         CreateNewPerson createNewPerson = new CreateNewPerson(taskManagementRepository);
         List<String> person = List.of("James");
         createNewPerson.execute(person);

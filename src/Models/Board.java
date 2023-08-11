@@ -16,7 +16,7 @@ public class Board implements Models.interfaces.Board {
     private List<String> history = new ArrayList<>();
 
     public Board(String name) {
-        this.name = name;
+        setName(name);
     }
 
 
@@ -28,8 +28,10 @@ public class Board implements Models.interfaces.Board {
         return name;
     }
 
-    private void setName(String name) {
-        ValidationHelpers.validateIntRange(name.length(), MIN_NAME_LENGTH, MAX_NAME_LENGTH, NAME_ERROR_MESSAGE);
+    protected void setName(String name) {
+        if(name.length()<MIN_NAME_LENGTH || name.length()>MAX_NAME_LENGTH){
+            throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
+        }
         this.name = name;
     }
 
