@@ -28,6 +28,6 @@ public class CreateNewTeam implements Command {
         return String.format("Team with name: %s was created.", createdNewTeam.getName());
     }
     private void parseParameters(List<String> parameters){
-        name = parameters.get(0);
+        this.name = parameters.get(0);
     }
 }

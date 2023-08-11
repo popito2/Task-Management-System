@@ -37,7 +37,7 @@ public class CreateANewBoardInATeam implements Command {
 
     private Models.interfaces.Team getTeam(List<String> parameters) {
         teamName = parameters.get(0);
-        return new Team(teamName);
+        return taskManagementRepository.findTeamByName(teamName);
     }
 
     private Board getBoard(List<String> parameters) {

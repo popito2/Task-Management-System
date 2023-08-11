@@ -17,7 +17,9 @@ public class ShowAllTeams implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
+        if(parameters.size()!=EXPECTED_NUMBER_OF_PARAMETERS){
+            throw new IllegalArgumentException("The parameters shuold ");
+        }
         List<String> teamsName = new ArrayList<>();
         if (teams.isEmpty()){
             return "There are no teams listed";
