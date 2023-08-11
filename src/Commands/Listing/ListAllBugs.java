@@ -25,7 +25,7 @@ public class ListAllBugs implements Command {
             return "There are no registered bugs.";
         }
 
-        return ListingHelpers.elementsToString(getFeedbackFromTasks(tasks));
+        return getFeedbackFromTasks(tasks).toString();
     }
 
     private List<Bug> getFeedbackFromTasks(List<Task> tasks){
