@@ -29,4 +29,31 @@ public class FeedbackTests {
                 () -> assertEquals(5, feedback.getRating())
         );
     }
+
+    @Test
+    public void testFeedbackStatusTransition() {
+        Feedback feedback = new Feedback(1, "Test Feedback", "This is a test feedback", Status.NEW, 5);
+
+
+        feedback.advanceFeedback();
+        assertEquals(Status.UNSCHEDULED, feedback.getStatus());
+
+        feedback.advanceFeedback();
+        assertEquals(Status.SCHEDULED, feedback.getStatus());
+
+        feedback.advanceFeedback();
+        assertEquals(Status.DONE, feedback.getStatus());
+
+
+        feedback.revertFeedback();
+        assertEquals(Status.SCHEDULED, feedback.getStatus());
+
+        feedback.revertFeedback();
+        assertEquals(Status.UNSCHEDULED, feedback.getStatus());
+
+        feedback.revertFeedback();
+        assertEquals(Status.NEW, feedback.getStatus());
+
+
+    }
 }

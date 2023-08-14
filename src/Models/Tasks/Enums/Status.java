@@ -8,5 +8,6 @@ public enum Status {
     IN_PROGRESS,
     NEW,
     UNSCHEDULED,
-    SCHEDULED;
+    SCHEDULED,
+    OPEN;
 }

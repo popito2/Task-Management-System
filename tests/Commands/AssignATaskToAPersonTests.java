@@ -1,12 +1,17 @@
 package Commands;
 import Core.Contracts.TaskManagementRepository;
 import Models.Member;
+import Models.Tasks.Bug;
 import Models.Tasks.Interfaces.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,6 +31,7 @@ public class AssignATaskToAPersonTests {
 
         assertThrows(IllegalArgumentException.class, () -> assignTaskCommand.execute(params));
     }
+
     @Test
     public void execute_should_ReturnInvalidParametersMessage_When_ArgumentCountDifferentThanExpected() {
         List<String> params = Arrays.asList("123");
@@ -34,6 +40,7 @@ public class AssignATaskToAPersonTests {
 
         assertEquals("Invalid number of parameters. Expected: 2", result);
     }
+
 
 
     @Test

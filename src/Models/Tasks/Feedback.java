@@ -24,15 +24,6 @@ public class Feedback extends Task implements Models.Tasks.Interfaces.Feedback {
     }
 
 
-
-    @Override
-    public String toString() {
-        return super.toString() + "\n" +
-                "Rating: " + rating +
-                "Title:" + getTitle();
-
-    }
-
     public void advanceFeedback(){
         switch(getStatus()){
             case NEW:
