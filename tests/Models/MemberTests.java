@@ -89,7 +89,7 @@ public class MemberTests {
         assertTrue(member.getHistoryChanges().isEmpty());
     }
 
-    public static Models.Tasks.Task initializeTask(){
+    public static Task initializeTask(){
         return new Task(1, "HelloHello", "This is a description", Status.ACTIVE);
     }
 }
