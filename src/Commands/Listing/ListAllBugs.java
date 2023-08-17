@@ -2,13 +2,16 @@ package Commands.Listing;
 
 import Commands.Contracts.Command;
 import Core.Contracts.TaskManagementRepository;
+import Models.Tasks.Enums.Status;
 import Models.Tasks.Interfaces.Bug;
 import Models.Tasks.Interfaces.Feedback;
 import Models.Tasks.Interfaces.Task;
 import Utils.ListingHelpers;
+import Utils.ParsingHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListAllBugs implements Command {
     private List<Bug> bugs = new ArrayList<>();
@@ -25,10 +28,28 @@ public class ListAllBugs implements Command {
             return "There are no registered bugs.";
         }
 
-        return getFeedbackFromTasks(tasks).toString();
+        bugs = getBugsFromTasks(tasks);
+
+        if (ParsingHelpers.tryParseEnum(parameters.get(0), Status.class) == Status.ACTIVE) {
+            List<Bug> activeBugs = bugs.stream()
+                    .filter(bug -> bug.getStatus() == Status.ACTIVE)
+                    .collect(Collectors.toList());
+            return activeBugs.toString();
+        }
+
+        if (ParsingHelpers.tryParseEnum(parameters.get(0), Status.class) == Status.FIXED) {
+            List<Bug> fixedBugs = bugs.stream()
+                    .filter(bug -> bug.getStatus() == Status.FIXED)
+                    .collect(Collectors.toList());
+            return fixedBugs.toString();
+        }
+
+
+
+        return bugs.toString();
     }
 
-    private List<Bug> getFeedbackFromTasks(List<Task> tasks){
+    private List<Bug> getBugsFromTasks(List<Task> tasks){
         for (Task task:tasks) {
             if(task instanceof Feedback){
                 bugs.add((Bug) task);
