@@ -38,7 +38,7 @@ public class ListAllFeedbacks implements Command {
 
             if(parameters.get(1).equals("Title")){
                 filteredFeedbacks = feedbackList.stream()
-                        .filter(feedback -> feedback.getTitle() == parameters.get(2))
+                        .filter(feedback -> feedback.getTitle().equals(parameters.get(2)))
                         .collect(Collectors.toList());
                 return filteredFeedbacks.toString();
             }

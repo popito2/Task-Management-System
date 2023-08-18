@@ -51,7 +51,7 @@ public class ListAllBugs implements Command {
             }
             if(parameters.get(1).equals("Title")){
                 filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getTitle() == parameters.get(2))
+                        .filter(bug -> bug.getTitle().equals(parameters.get(2)))
                         .collect(Collectors.toList());
                 return filteredBugs.toString();
             }
