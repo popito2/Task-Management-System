@@ -25,7 +25,7 @@ public class ListAllTasks implements Command {
         }
 
         if (parameters.get(0).equals("filter")) {
-            List<Task> activeTasks = tasks.stream().filter(task -> task.getTitle() == parameters.get(1)).collect(Collectors.toList());
+            List<Task> activeTasks = tasks.stream().filter(task -> task.getTitle().equals(parameters.get(1))).collect(Collectors.toList());
             return activeTasks.toString();
         }
         if(parameters.get(0).equals("sort")){

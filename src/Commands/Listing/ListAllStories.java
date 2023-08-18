@@ -43,7 +43,7 @@ public class ListAllStories implements Command {
             }
             if(parameters.get(1).equals("Title")){
                 filteredStories = stories.stream()
-                        .filter(story -> story.getTitle() == parameters.get(2))
+                        .filter(story -> story.getTitle().equals(parameters.get(2)))
                         .collect(Collectors.toList());
                 return filteredStories.toString();
             }
