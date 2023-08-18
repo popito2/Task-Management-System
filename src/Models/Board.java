@@ -15,24 +15,22 @@ public class Board implements Models.interfaces.Board {
     private List<Task> tasks = new ArrayList<>();
     private List<String> history = new ArrayList<>();
 
+
     public Board(String name) {
         setName(name);
     }
-
-
+    protected void setName(String name) {
+        if(name.length()<MIN_NAME_LENGTH || name.length()>MAX_NAME_LENGTH){
+            throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
+        }
+        this.name = name;
+    }
     public void addHistoryEntry(String entry) {
         history.add(entry);
     }
 
     public String getName() {
         return name;
-    }
-
-    protected void setName(String name) {
-        if(name.length()<MIN_NAME_LENGTH || name.length()>MAX_NAME_LENGTH){
-            throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
-        }
-        this.name = name;
     }
 
     public List<Task> getTasks() {
@@ -53,18 +51,14 @@ public class Board implements Models.interfaces.Board {
         this.tasks.add((Task) task);
 
     }
-
     @Override
     public void removeTask(Models.Tasks.Task task) {
         this.tasks.remove(task);
 
     }
-
     @Override
     public void addHistory(String history) {
         this.history.add(history);
 
-
     }
-
 }

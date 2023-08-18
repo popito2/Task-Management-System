@@ -39,12 +39,6 @@ public class ListAllTasksWithAssignee implements Command {
                         .collect(Collectors.toList());
                 return filteredByStatus.toString();
             }
-            /*if (parameters.get(1).equals("assignee")) {
-                List<Task> filteredByAssignee = tasks.stream()
-                        .filter(task -> task.getStatus() == ParsingHelpers.tryParseEnum(parameters.get(2), ListAllTasksWithAssignee.class))
-                        .collect(Collectors.toList());
-                return filteredByAssignee.toString();
-            }*/
         }
         if(parameters.get(0).equals("sort")){
             List<Task> sortedTasks = tasks.stream().sorted(Comparator.comparing(task -> task.getTitle())).collect(Collectors.toList());
