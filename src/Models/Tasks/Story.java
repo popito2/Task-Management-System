@@ -15,29 +15,23 @@ public class Story extends Task implements Models.Tasks.Interfaces.Story {
         setPriority(priority);
         setSize(size);
     }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
     private void setPriority(Priority priority) {
         this.priority = priority;
     }
-
-    public Size getSize() {
-        return size;
+    private void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
-
     private void setSize(Size size) {
         this.size = size;
     }
-
+    public Priority getPriority() {
+        return priority;
+    }
+    public Size getSize() {
+        return size;
+    }
     public String getAssignee() {
         return assignee;
-    }
-
-    private void setAssignee(String assignee) {
-        this.assignee = assignee;
     }
 
     public void advanceStoryStatus() {

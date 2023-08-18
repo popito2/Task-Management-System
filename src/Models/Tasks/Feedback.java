@@ -14,15 +14,12 @@ public class Feedback extends Task implements Models.Tasks.Interfaces.Feedback {
         super(id, title, description, status);
         this.rating = rating;
     }
-
-    public int getRating() {
-        return rating;
-    }
-
     private void setRating(int rating) {
         this.rating = rating;
     }
-
+    public int getRating() {
+        return rating;
+    }
 
     public void advanceFeedback(){
         switch(getStatus()){
