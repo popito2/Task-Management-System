@@ -1,7 +1,5 @@
 package Models;
 
-import Models.Tasks.Enums.Status;
-import Models.Tasks.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

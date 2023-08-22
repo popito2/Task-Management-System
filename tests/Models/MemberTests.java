@@ -1,10 +1,9 @@
 package Models;
 
 import Models.Tasks.Enums.Status;
-import Models.Tasks.Task;
+import Models.Tasks.TaskImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
 import java.util.List;
 
@@ -43,14 +42,14 @@ public class MemberTests {
     //For question
     @Test
     public void testAddTask() {
-        Task task = initializeTask();
+        TaskImpl task = initializeTask();
         member.addTask(task);
         assertTrue(member.getTasks().contains(task));
     }
 
     @Test
     public void testRemoveTask() {
-        Task task = initializeTask();
+        TaskImpl task = initializeTask();
         member.addTask(task);
         member.removeTask(task);
         assertFalse(member.getTasks().contains(task));
@@ -58,7 +57,7 @@ public class MemberTests {
 
     @Test
     public void testRemoveNonExistentTask() {
-        Task task = initializeTask();
+        TaskImpl task = initializeTask();
         member.removeTask(task);
         assertFalse(member.getTasks().contains(task));
     }
@@ -89,7 +88,7 @@ public class MemberTests {
         assertTrue(member.getHistoryChanges().isEmpty());
     }
 
-    public static Task initializeTask(){
-        return new Task(1, "HelloHello", "This is a description", Status.ACTIVE);
+    public static TaskImpl initializeTask(){
+        return new TaskImpl(1, "HelloHello", "This is a description", Status.ACTIVE);
     }
 }

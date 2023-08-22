@@ -4,9 +4,7 @@ import Models.Tasks.Enums.Priority;
 import Models.Tasks.Enums.Size;
 import Models.Tasks.Enums.Status;
 
-import java.util.List;
-
-public class Story extends Task implements Models.Tasks.Interfaces.Story {
+public class Story extends TaskImpl implements Models.Tasks.Interfaces.Story {
     private Priority priority;
     private Size size;
     private String assignee;

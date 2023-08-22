@@ -4,7 +4,7 @@ import Commands.Contracts.Command;
 import Core.Contracts.TaskManagementRepository;
 import Models.Tasks.Interfaces.Bug;
 import Models.Tasks.Interfaces.Task;
-import Models.Team;
+import Models.Tasks.TaskImpl;
 import Models.interfaces.Member;
 import Utils.ParsingHelpers;
 import Utils.ValidationHelpers;
@@ -30,7 +30,7 @@ public class AssignATaskToAPerson implements Command {
 
         Member member = getMember(parameters);
 
-        member.addTask((Models.Tasks.Task) task);
+        member.addTask((TaskImpl) task);
 
         Bug bug = (Bug) taskManagementRepository.findTaskById( ParsingHelpers.tryParseInt(parameters.get(0),"id"));
 

@@ -1,8 +1,7 @@
 package Models;
 
 import Models.Tasks.Interfaces.Task;
-import Models.interfaces.Member;
-import Utils.ValidationHelpers;
+import Models.Tasks.TaskImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +46,12 @@ public class Board implements Models.interfaces.Board {
     }
 
     @Override
-    public void addTask(Models.Tasks.Task task) {
+    public void addTask(TaskImpl task) {
         this.tasks.add((Task) task);
 
     }
     @Override
-    public void removeTask(Models.Tasks.Task task) {
+    public void removeTask(TaskImpl task) {
         this.tasks.remove(task);
 
     }

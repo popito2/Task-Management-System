@@ -1,13 +1,8 @@
 package Models.Tasks;
 
 import Models.Tasks.Enums.Status;
-import Models.Tasks.Interfaces.Identifiable;
-import Utils.ValidationHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Feedback extends Task implements Models.Tasks.Interfaces.Feedback {
+public class Feedback extends TaskImpl implements Models.Tasks.Interfaces.Feedback {
     private int rating;
 
     public Feedback(int id, String title, String description, Status status, int rating) {

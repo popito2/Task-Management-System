@@ -1,6 +1,5 @@
 package Models.Tasks;
 
-import Models.Member;
 import Models.Tasks.Enums.Priority;
 import Models.Tasks.Enums.Severity;
 import Models.Tasks.Enums.Status;
@@ -8,7 +7,7 @@ import Models.Tasks.Enums.Status;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bug extends Task implements Models.Tasks.Interfaces.Bug {
+public class Bug extends TaskImpl implements Models.Tasks.Interfaces.Bug {
 
     private List<String> stepsToReproduce = new ArrayList<>();
     private Priority priority;

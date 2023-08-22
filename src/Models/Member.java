@@ -1,6 +1,7 @@
 package Models;
 
 import Models.Tasks.Interfaces.Task;
+import Models.Tasks.TaskImpl;
 import Utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Member implements Models.interfaces.Member {
     public static final int NAME_MAX_LENGTH = 15;
     public static final String NAME_ERROR_MESSAGE = "Name should be between 5 and 15 symbols.";
     private String name;
-    private List<Task> tasks = new ArrayList<>();
+    private List<TaskImpl> tasks = new ArrayList<>();
     private List<String> historyChanges = new ArrayList<>();
 
     public Member(String name) {
@@ -27,9 +28,10 @@ public class Member implements Models.interfaces.Member {
         this.name = name;
     }
 
-    public List<Task> getTasks() {
+    public List<TaskImpl> getTasks() {
         return new ArrayList<>(tasks);
     }
+
 
     public List<String> getHistoryChanges() {
         return new ArrayList<>(historyChanges);
@@ -37,12 +39,12 @@ public class Member implements Models.interfaces.Member {
 
 
     @Override
-    public void addTask(Models.Tasks.Task task) {
-        this.tasks.add((Task) task);
+    public void addTask(TaskImpl task) {
+        this.tasks.add(task);
     }
 
     @Override
-    public void removeTask(Models.Tasks.Task task) {
+    public void removeTask(TaskImpl task) {
         this.tasks.remove(task);
 
     }

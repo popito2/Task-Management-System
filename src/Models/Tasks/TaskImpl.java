@@ -1,13 +1,12 @@
 package Models.Tasks;
 
-import ActivityHistory.History;
 import Models.Tasks.Enums.Status;
 import Utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task {
+public class TaskImpl {
     public static final int MIN_NAME_LENGTH = 10;
     public static final int MAX_NAME_LENGTH = 50;
     public static final String NAME_ERROR = "The name must be between 10 and 50 symbols.";
@@ -21,7 +20,7 @@ public class Task {
     private List<String> comments;
     private List<String> historyChanges;
 
-    public Task(int id, String title, String description, Status status ) {
+    public TaskImpl(int id, String title, String description, Status status ) {
         Id = id;
         setTitle(title);
         setDescription(description);
