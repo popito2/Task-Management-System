@@ -18,69 +18,78 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAllBugs implements Command {
-    private List<Bug> bugs = new ArrayList<>();
-    private List<Task> tasks;
+    private TaskManagementRepository taskManagementRepository;
 
     public ListAllBugs(TaskManagementRepository taskManagementRepository){
-        tasks = taskManagementRepository.getTasks();
+        this.taskManagementRepository = taskManagementRepository;
     }
 
 
     @Override
     public String execute(List<String> parameters) {
+        List<Bug> filteredBugs;
+        List<Bug> bugs;
+
+        bugs = getBugsFromTasks(taskManagementRepository.getTasks());
+
         if(bugs.isEmpty()){
             return "There are no registered bugs.";
         }
 
-        List<Bug> filteredBugs;
-
-        bugs = getBugsFromTasks(tasks);
-
-        if (parameters.get(0).equals("filter")){
-            if(parameters.get(1).equals("Assignee")){
-                filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getAssignee().equals(parameters.get(2)))
-                        .collect(Collectors.toList());
-                return filteredBugs.toString();
-            }
-            if(parameters.get(1).equals("Status")){
-                filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
-                        .collect(Collectors.toList());
-                return filteredBugs.toString();
+        if (parameters.size()==0){
+            return bugs.toString();
+        }
+        else if(parameters.size()==2){
+            if (parameters.get(0).equals("sort")){
+                if(parameters.get(1).equals("Title")){
+                    List<Bug> sortedBugs = bugs.stream()
+                            .sorted(Comparator.comparing(Bug::getTitle))
+                            .collect(Collectors.toList());
+                    return sortedBugs.toString();
+                }
+                if(parameters.get(1).equals("Severity")){
+                    List<Bug> sortedBugs = bugs.stream()
+                            .sorted(Comparator.comparing(Bug::getSeverity))
+                            .collect(Collectors.toList());
+                    return sortedBugs.toString();
+                }
+                if(parameters.get(1).equals("Priority")){
+                    List<Bug> sortedBugs = bugs.stream()
+                            .sorted(Comparator.comparing(Bug::getPriority))
+                            .collect(Collectors.toList());
+                    return sortedBugs.toString();
+                }
             }
         }
-        if (parameters.get(0).equals("sort")){
-            if(parameters.get(1).equals("Title")){
-                List<Bug> sortedBugs = bugs.stream()
-                        .sorted(Comparator.comparing(Bug::getTitle))
-                        .collect(Collectors.toList());
-                return sortedBugs.toString();
-            }
-            if(parameters.get(1).equals("Severity")){
-                List<Bug> sortedBugs = bugs.stream()
-                        .sorted(Comparator.comparing(Bug::getSeverity))
-                        .collect(Collectors.toList());
-                return sortedBugs.toString();
-            }
-            if(parameters.get(1).equals("Priority")){
-                List<Bug> sortedBugs = bugs.stream()
-                        .sorted(Comparator.comparing(Bug::getPriority))
-                        .collect(Collectors.toList());
-                return sortedBugs.toString();
+        else if(parameters.size()==3){
+            if (parameters.get(0).equals("filter")){
+                if(parameters.get(1).equals("Assignee")){
+                    filteredBugs = bugs.stream()
+                            .filter(bug -> bug.getAssignee().equals(parameters.get(2)))
+                            .collect(Collectors.toList());
+                    return filteredBugs.toString();
+                }
+                if(parameters.get(1).equals("Status")){
+                    filteredBugs = bugs.stream()
+                            .filter(bug -> bug.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
+                            .collect(Collectors.toList());
+                    return filteredBugs.toString();
+                }
             }
         }
-
 
         return bugs.toString();
     }
 
     private List<Bug> getBugsFromTasks(List<Task> tasks){
+        List<Bug> bugs = new ArrayList<>();
         for (Task task:tasks) {
-            if(task instanceof Feedback){
+            if(task instanceof Bug){
                 bugs.add((Bug) task);
             }
         }
         return bugs;
     }
+
+
 }

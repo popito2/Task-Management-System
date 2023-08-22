@@ -32,8 +32,6 @@ public class AssignATaskToAPersonTests {
         assertThrows(IllegalArgumentException.class, () -> assignTaskCommand.execute(params));
     }
 
-
-
     @Test
     public void execute_should_ThrowException_When_TaskNotFound() {
         int taskId = 123;
