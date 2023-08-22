@@ -4,6 +4,7 @@ import Commands.Contracts.Command;
 import Core.Contracts.TaskManagementRepository;
 import Models.Tasks.Enums.Priority;
 import Models.Tasks.Enums.Severity;
+import Models.Tasks.Enums.Status;
 import Models.Tasks.Interfaces.Feedback;
 import Models.Tasks.Interfaces.Story;
 import Models.Tasks.Interfaces.Task;
@@ -35,15 +36,15 @@ public class ListAllStories implements Command {
         stories = getStoriesFromTasks(tasks);
 
         if (parameters.get(0).equals("filter")){
-            if(parameters.get(1).equals("Priority")){
+            if(parameters.get(1).equals("Status")){
                 filteredStories = stories.stream()
-                        .filter(story -> story.getPriority() == ParsingHelpers.tryParseEnum(parameters.get(2), Priority.class))
+                        .filter(story -> story.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
                         .collect(Collectors.toList());
                 return filteredStories.toString();
             }
-            if(parameters.get(1).equals("Title")){
+            if(parameters.get(1).equals("Assignee")){
                 filteredStories = stories.stream()
-                        .filter(story -> story.getTitle().equals(parameters.get(2)))
+                        .filter(story -> story.getAssignee().equals(parameters.get(2)))
                         .collect(Collectors.toList());
                 return filteredStories.toString();
             }
@@ -55,9 +56,15 @@ public class ListAllStories implements Command {
                         .collect(Collectors.toList());
                 return sortedStories.toString();
             }
-            if(parameters.get(1).equals("Assignee")){
+            if(parameters.get(1).equals("Priority")){
                 List<Story> sortedStories = stories.stream()
-                        .sorted(Comparator.comparing(Story::getAssignee))
+                        .sorted(Comparator.comparing(Story::getPriority))
+                        .collect(Collectors.toList());
+                return sortedStories.toString();
+            }
+            if(parameters.get(1).equals("Size")){
+                List<Story> sortedStories = stories.stream()
+                        .sorted(Comparator.comparing(Story::getSize))
                         .collect(Collectors.toList());
                 return sortedStories.toString();
             }
