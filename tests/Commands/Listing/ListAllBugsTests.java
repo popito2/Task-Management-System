@@ -26,16 +26,15 @@ public class ListAllBugsTests {
 
     @Test
     public void execute_should_ListAllBugs_When_ValidArgumentsArePassed() {
-        CreateNewBug bug = new CreateNewBug(taskManagementRepository);
-        List<String> bugParams = List.of("Bugbugbugbug", "This is a new bug", String.valueOf(Status.ACTIVE), String.valueOf(Priority.HIGH), String.valueOf(Severity.CRITICAL));
-        List<Task> tasks = new ArrayList<>();
-        bug.execute(bugParams);
-        Bug bug1 = (Bug) taskManagementRepository.findTaskById(1);
-        tasks.add(bug1);
-        List<String> params = new ArrayList<>();
 
+        Bug bug = taskManagementRepository.createNewBug("Bugbugbugbug", "This is a new bug", Status.ACTIVE, Priority.HIGH, Severity.CRITICAL);
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(bug);
+
+        List<String> params = new ArrayList<>();
         String result = listAllBugs.execute(params);
 
         Assertions.assertEquals(tasks.toString(), result);
+
     }
 }

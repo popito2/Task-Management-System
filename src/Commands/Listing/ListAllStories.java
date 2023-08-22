@@ -18,55 +18,60 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAllStories implements Command {
-    private List<Story> stories = new ArrayList<>();
-    private List<Task> tasks;
+    private TaskManagementRepository taskManagementRepository;
 
     public ListAllStories(TaskManagementRepository taskManagementRepository){
-        tasks = taskManagementRepository.getTasks();
+        this.taskManagementRepository = taskManagementRepository;
     }
 
 
     @Override
     public String execute(List<String> parameters) {
+        List<Story> filteredStories;
+        List<Story> stories;
+        stories = getStoriesFromTasks(taskManagementRepository.getTasks());
+
         if(stories.isEmpty()){
             return "There are no registered stories.";
         }
 
-        List<Story> filteredStories;
-        stories = getStoriesFromTasks(tasks);
-
-        if (parameters.get(0).equals("filter")){
-            if(parameters.get(1).equals("Status")){
-                filteredStories = stories.stream()
-                        .filter(story -> story.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
-                        .collect(Collectors.toList());
-                return filteredStories.toString();
+        if(parameters.size()==0){
+            return stories.toString();
+        }else if(parameters.size()==2){
+            if (parameters.get(0).equals("sort")){
+                if(parameters.get(1).equals("Title")){
+                    List<Story> sortedStories = stories.stream()
+                            .sorted(Comparator.comparing(Story::getTitle))
+                            .collect(Collectors.toList());
+                    return sortedStories.toString();
+                }
+                if(parameters.get(1).equals("Priority")){
+                    List<Story> sortedStories = stories.stream()
+                            .sorted(Comparator.comparing(Story::getPriority))
+                            .collect(Collectors.toList());
+                    return sortedStories.toString();
+                }
+                if(parameters.get(1).equals("Size")){
+                    List<Story> sortedStories = stories.stream()
+                            .sorted(Comparator.comparing(Story::getSize))
+                            .collect(Collectors.toList());
+                    return sortedStories.toString();
+                }
             }
-            if(parameters.get(1).equals("Assignee")){
-                filteredStories = stories.stream()
-                        .filter(story -> story.getAssignee().equals(parameters.get(2)))
-                        .collect(Collectors.toList());
-                return filteredStories.toString();
-            }
-        }
-        if (parameters.get(0).equals("sort")){
-            if(parameters.get(1).equals("Title")){
-                List<Story> sortedStories = stories.stream()
-                        .sorted(Comparator.comparing(Story::getTitle))
-                        .collect(Collectors.toList());
-                return sortedStories.toString();
-            }
-            if(parameters.get(1).equals("Priority")){
-                List<Story> sortedStories = stories.stream()
-                        .sorted(Comparator.comparing(Story::getPriority))
-                        .collect(Collectors.toList());
-                return sortedStories.toString();
-            }
-            if(parameters.get(1).equals("Size")){
-                List<Story> sortedStories = stories.stream()
-                        .sorted(Comparator.comparing(Story::getSize))
-                        .collect(Collectors.toList());
-                return sortedStories.toString();
+        }else if(parameters.size()==3){
+            if (parameters.get(0).equals("filter")){
+                if(parameters.get(1).equals("Status")){
+                    filteredStories = stories.stream()
+                            .filter(story -> story.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
+                            .collect(Collectors.toList());
+                    return filteredStories.toString();
+                }
+                if(parameters.get(1).equals("Assignee")){
+                    filteredStories = stories.stream()
+                            .filter(story -> story.getAssignee().equals(parameters.get(2)))
+                            .collect(Collectors.toList());
+                    return filteredStories.toString();
+                }
             }
         }
 
@@ -74,8 +79,9 @@ public class ListAllStories implements Command {
     }
 
     private List<Story> getStoriesFromTasks(List<Task> tasks){
+        List<Story> stories = new ArrayList<>();
         for (Task task:tasks) {
-            if(task instanceof Feedback){
+            if(task instanceof Story){
                 stories.add((Story) task);
             }
         }
