@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 public class ListAllFeedbacks implements Command {
     private TaskManagementRepository taskManagementRepository;
+    private List<Feedback> filteredFeedbacks;
+    private List<Feedback> feedbackList;
 
     public ListAllFeedbacks(TaskManagementRepository taskManagementRepository){
         this.taskManagementRepository = taskManagementRepository;
@@ -25,11 +27,6 @@ public class ListAllFeedbacks implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-
-
-        List<Feedback> filteredFeedbacks;
-        List<Feedback> feedbackList;
-
         feedbackList = getFeedbackFromTasks(taskManagementRepository.getTasks());
 
         if(feedbackList.isEmpty()){
@@ -39,29 +36,9 @@ public class ListAllFeedbacks implements Command {
         if(parameters.size()==0){
             return feedbackList.toString();
         }else if(parameters.size()==2){
-            if (parameters.get(0).equals("sort")){
-                if(parameters.get(1).equals("Title")){
-                    List<Feedback> sortedFeedbacks = feedbackList.stream()
-                            .sorted(Comparator.comparing(Feedback::getTitle))
-                            .collect(Collectors.toList());
-                    return sortedFeedbacks.toString();
-                }
-                if(parameters.get(1).equals("Rating")){
-                    List<Feedback> sortedFeedbacks = feedbackList.stream()
-                            .sorted(Comparator.comparing(Feedback::getRating))
-                            .collect(Collectors.toList());
-                    return sortedFeedbacks.toString();
-                }
-            }
+            return sortFeedback(parameters);
         }else if(parameters.size()==3){
-            if (parameters.get(0).equals("filter")){
-                if(parameters.get(1).equals("Title")){
-                    filteredFeedbacks = feedbackList.stream()
-                            .filter(feedback -> feedback.getTitle().equals(parameters.get(2)))
-                            .collect(Collectors.toList());
-                    return filteredFeedbacks.toString();
-                }
-            }
+            return filterFeedback(parameters);
         }
 
         return feedbackList.toString();
@@ -75,5 +52,35 @@ public class ListAllFeedbacks implements Command {
             }
         }
         return feedbackList;
+    }
+
+    private String filterFeedback(List<String> parameters){
+        if (parameters.get(0).equals("filter")){
+            if(parameters.get(1).equals("Title")){
+                filteredFeedbacks = feedbackList.stream()
+                        .filter(feedback -> feedback.getTitle().equals(parameters.get(2)))
+                        .collect(Collectors.toList());
+                return filteredFeedbacks.toString();
+            }
+        }
+        return "Wrong command";
+    }
+
+    private String sortFeedback(List<String> parameters){
+        if (parameters.get(0).equals("sort")){
+            if(parameters.get(1).equals("Title")){
+                List<Feedback> sortedFeedbacks = feedbackList.stream()
+                        .sorted(Comparator.comparing(Feedback::getTitle))
+                        .collect(Collectors.toList());
+                return sortedFeedbacks.toString();
+            }
+            if(parameters.get(1).equals("Rating")){
+                List<Feedback> sortedFeedbacks = feedbackList.stream()
+                        .sorted(Comparator.comparing(Feedback::getRating))
+                        .collect(Collectors.toList());
+                return sortedFeedbacks.toString();
+            }
+        }
+        return "Wrong command";
     }
 }
