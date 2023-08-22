@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 public class ListAllBugs implements Command {
     private TaskManagementRepository taskManagementRepository;
+    private List<Bug> filteredBugs;
+    private List<Bug> bugs;
 
     public ListAllBugs(TaskManagementRepository taskManagementRepository){
         this.taskManagementRepository = taskManagementRepository;
@@ -27,9 +29,6 @@ public class ListAllBugs implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        List<Bug> filteredBugs;
-        List<Bug> bugs;
-
         bugs = getBugsFromTasks(taskManagementRepository.getTasks());
 
         if(bugs.isEmpty()){
@@ -40,42 +39,10 @@ public class ListAllBugs implements Command {
             return bugs.toString();
         }
         else if(parameters.size()==2){
-            if (parameters.get(0).equals("sort")){
-                if(parameters.get(1).equals("Title")){
-                    List<Bug> sortedBugs = bugs.stream()
-                            .sorted(Comparator.comparing(Bug::getTitle))
-                            .collect(Collectors.toList());
-                    return sortedBugs.toString();
-                }
-                if(parameters.get(1).equals("Severity")){
-                    List<Bug> sortedBugs = bugs.stream()
-                            .sorted(Comparator.comparing(Bug::getSeverity))
-                            .collect(Collectors.toList());
-                    return sortedBugs.toString();
-                }
-                if(parameters.get(1).equals("Priority")){
-                    List<Bug> sortedBugs = bugs.stream()
-                            .sorted(Comparator.comparing(Bug::getPriority))
-                            .collect(Collectors.toList());
-                    return sortedBugs.toString();
-                }
-            }
+            return sortBugs(parameters);
         }
         else if(parameters.size()==3){
-            if (parameters.get(0).equals("filter")){
-                if(parameters.get(1).equals("Assignee")){
-                    filteredBugs = bugs.stream()
-                            .filter(bug -> bug.getAssignee().equals(parameters.get(2)))
-                            .collect(Collectors.toList());
-                    return filteredBugs.toString();
-                }
-                if(parameters.get(1).equals("Status")){
-                    filteredBugs = bugs.stream()
-                            .filter(bug -> bug.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
-                            .collect(Collectors.toList());
-                    return filteredBugs.toString();
-                }
-            }
+            return filterBugs(parameters);
         }
 
         return bugs.toString();
@@ -91,5 +58,46 @@ public class ListAllBugs implements Command {
         return bugs;
     }
 
+    private String filterBugs(List<String> parameters){
+        if (parameters.get(0).equals("filter")){
+            if(parameters.get(1).equals("Assignee")){
+                filteredBugs = bugs.stream()
+                        .filter(bug -> bug.getAssignee().equals(parameters.get(2)))
+                        .collect(Collectors.toList());
+                return filteredBugs.toString();
+            }
+            if(parameters.get(1).equals("Status")){
+                filteredBugs = bugs.stream()
+                        .filter(bug -> bug.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
+                        .collect(Collectors.toList());
+                return filteredBugs.toString();
+            }
+        }
+        return "Wrong command";
+    }
+
+    private String sortBugs(List<String> parameters){
+        if (parameters.get(0).equals("sort")){
+            if(parameters.get(1).equals("Title")){
+                List<Bug> sortedBugs = bugs.stream()
+                        .sorted(Comparator.comparing(Bug::getTitle))
+                        .collect(Collectors.toList());
+                return sortedBugs.toString();
+            }
+            if(parameters.get(1).equals("Severity")){
+                List<Bug> sortedBugs = bugs.stream()
+                        .sorted(Comparator.comparing(Bug::getSeverity))
+                        .collect(Collectors.toList());
+                return sortedBugs.toString();
+            }
+            if(parameters.get(1).equals("Priority")){
+                List<Bug> sortedBugs = bugs.stream()
+                        .sorted(Comparator.comparing(Bug::getPriority))
+                        .collect(Collectors.toList());
+                return sortedBugs.toString();
+            }
+        }
+        return "Wrong command";
+    }
 
 }

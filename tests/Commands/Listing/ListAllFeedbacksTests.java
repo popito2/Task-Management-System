@@ -1,10 +1,7 @@
 package Commands.Listing;
 
 import Core.TaskManagementRepository;
-import Models.Tasks.Enums.Priority;
-import Models.Tasks.Enums.Severity;
 import Models.Tasks.Enums.Status;
-import Models.Tasks.Interfaces.Bug;
 import Models.Tasks.Interfaces.Feedback;
 import Models.Tasks.Interfaces.Task;
 import org.junit.jupiter.api.Assertions;

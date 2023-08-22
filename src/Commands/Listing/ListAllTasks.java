@@ -24,15 +24,30 @@ public class ListAllTasks implements Command {
             return "There are no tasks.";
         }
 
+        if(parameters.size()==0){
+            return ListingHelpers.elementsToString(tasks);
+        }else if(parameters.size()==1){
+            sortTasks(parameters);
+        }else if(parameters.size()==2){
+            filterTasks(parameters);
+        }
+
+        return ListingHelpers.elementsToString(tasks);
+    }
+
+    private String filterTasks(List<String> parameters){
         if (parameters.get(0).equals("filter")) {
             List<Task> activeTasks = tasks.stream().filter(task -> task.getTitle().equals(parameters.get(1))).collect(Collectors.toList());
             return activeTasks.toString();
         }
+        return "Wrong command";
+    }
+
+    private String sortTasks(List<String> parameters){
         if(parameters.get(0).equals("sort")){
             List<Task> sortedTasks = tasks.stream().sorted(Comparator.comparing(task -> task.getTitle())).collect(Collectors.toList());
             return sortedTasks.toString();
         }
-
-        return ListingHelpers.elementsToString(tasks);
+        return "Wrong command";
     }
 }

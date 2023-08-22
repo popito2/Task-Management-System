@@ -15,34 +15,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAllTasksWithAssignee implements Command {
-    private final TaskManagementRepository taskManagementRepository;
-
+    private List<Task> tasks;
+    List<Task> tasksWithAssignee = filterTasks(tasks);
 
     public ListAllTasksWithAssignee(TaskManagementRepository taskManagementRepository) {
-        this.taskManagementRepository = taskManagementRepository;
+        tasks = taskManagementRepository.getTasks();
     }
 
     @Override
     public String execute(List<String> parameters) {
-        List<Task> tasks = taskManagementRepository.getTasks();
-        List<Task>tasksWithAssignee = filterTasks(tasks);
-
         if (tasksWithAssignee.isEmpty()) {
             return "No tasks found.";
         }
-
-
-        if (parameters.get(0).equals("filter")) {
-            if (parameters.get(1).equals("status")) {
-                List<Task> filteredByStatus = tasks.stream()
-                        .filter(task -> task.getStatus() == ParsingHelpers.tryParseEnum(parameters.get(2), Status.class))
-                        .collect(Collectors.toList());
-                return filteredByStatus.toString();
-            }
-        }
-        if(parameters.get(0).equals("sort")){
-            List<Task> sortedTasks = tasks.stream().sorted(Comparator.comparing(task -> task.getTitle())).collect(Collectors.toList());
-            return sortedTasks.toString();
+        if(parameters.size()==0){
+            return ListingHelpers.elementsToString(tasksWithAssignee);
+        }else if(parameters.size()==1){
+            return sortTasksWithAssignee(parameters);
+        }else if(parameters.size()==3){
+            return filterTasksWithAssignee(parameters);
         }
 
         return ListingHelpers.elementsToString(tasksWithAssignee);
@@ -57,6 +47,26 @@ public class ListAllTasksWithAssignee implements Command {
 
         }
         return tasksWithAssignee;
+    }
+
+    private String filterTasksWithAssignee(List<String> parameters){
+        if (parameters.get(0).equals("filter")) {
+            if (parameters.get(1).equals("status")) {
+                List<Task> filteredByStatus = tasks.stream()
+                        .filter(task -> task.getStatus() == ParsingHelpers.tryParseEnum(parameters.get(2), Status.class))
+                        .collect(Collectors.toList());
+                return filteredByStatus.toString();
+            }
+        }
+        return "Wrong command";
+    }
+
+    private String sortTasksWithAssignee(List<String> parameters){
+        if(parameters.get(0).equals("sort")){
+            List<Task> sortedTasks = tasks.stream().sorted(Comparator.comparing(task -> task.getTitle())).collect(Collectors.toList());
+            return sortedTasks.toString();
+        }
+        return "Wrong command";
     }
 }
 
