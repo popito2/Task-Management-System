@@ -22,6 +22,7 @@ public class ListAllTasksWithAssigneeTests {
 
     @BeforeEach
     void setUp() {
+        taskManagementRepository = new Core.TaskManagementRepository();
 
         listAllTasksWithAssignee = new ListAllTasksWithAssignee(taskManagementRepository);
     }

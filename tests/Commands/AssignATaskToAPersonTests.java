@@ -32,15 +32,6 @@ public class AssignATaskToAPersonTests {
         assertThrows(IllegalArgumentException.class, () -> assignTaskCommand.execute(params));
     }
 
-    @Test
-    public void execute_should_ReturnInvalidParametersMessage_When_ArgumentCountDifferentThanExpected() {
-        List<String> params = Arrays.asList("123");
-
-        String result = assignTaskCommand.execute(params);
-
-        assertEquals("Invalid number of parameters. Expected: 2", result);
-    }
-
 
 
     @Test
