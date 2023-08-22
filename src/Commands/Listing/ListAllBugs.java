@@ -37,21 +37,15 @@ public class ListAllBugs implements Command {
         bugs = getBugsFromTasks(tasks);
 
         if (parameters.get(0).equals("filter")){
-            if(parameters.get(1).equals("Priority")){
+            if(parameters.get(1).equals("Assignee")){
                 filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getPriority() == ParsingHelpers.tryParseEnum(parameters.get(2), Priority.class))
+                        .filter(bug -> bug.getAssignee().equals(parameters.get(2)))
                         .collect(Collectors.toList());
                 return filteredBugs.toString();
             }
-            if(parameters.get(1).equals("Severity")){
+            if(parameters.get(1).equals("Status")){
                 filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getSeverity() == ParsingHelpers.tryParseEnum(parameters.get(2), Severity.class))
-                        .collect(Collectors.toList());
-                return filteredBugs.toString();
-            }
-            if(parameters.get(1).equals("Title")){
-                filteredBugs = bugs.stream()
-                        .filter(bug -> bug.getTitle().equals(parameters.get(2)))
+                        .filter(bug -> bug.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
                         .collect(Collectors.toList());
                 return filteredBugs.toString();
             }
@@ -63,9 +57,15 @@ public class ListAllBugs implements Command {
                         .collect(Collectors.toList());
                 return sortedBugs.toString();
             }
-            if(parameters.get(1).equals("Assignee")){
+            if(parameters.get(1).equals("Severity")){
                 List<Bug> sortedBugs = bugs.stream()
-                        .sorted(Comparator.comparing(Bug::getAssignee))
+                        .sorted(Comparator.comparing(Bug::getSeverity))
+                        .collect(Collectors.toList());
+                return sortedBugs.toString();
+            }
+            if(parameters.get(1).equals("Priority")){
+                List<Bug> sortedBugs = bugs.stream()
+                        .sorted(Comparator.comparing(Bug::getPriority))
                         .collect(Collectors.toList());
                 return sortedBugs.toString();
             }
