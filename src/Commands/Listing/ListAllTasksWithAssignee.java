@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class ListAllTasksWithAssignee implements Command {
     private List<Task> tasks;
-    List<Task> tasksWithAssignee = filterTasks(tasks);
 
     public ListAllTasksWithAssignee(TaskManagementRepository taskManagementRepository) {
         tasks = taskManagementRepository.getTasks();
@@ -24,6 +23,7 @@ public class ListAllTasksWithAssignee implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        List<Task> tasksWithAssignee = filterTasks(tasks);
         if (tasksWithAssignee.isEmpty()) {
             return "No tasks found.";
         }
