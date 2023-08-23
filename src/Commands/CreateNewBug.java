@@ -28,7 +28,7 @@ public class CreateNewBug implements Command {
         this.taskManagementRepository = taskManagementRepository;
     }
 
-    public String execute(List<String> parameters){
+    public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         parseParameters(parameters);

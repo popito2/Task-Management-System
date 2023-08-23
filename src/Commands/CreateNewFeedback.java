@@ -28,7 +28,7 @@ public class CreateNewFeedback implements Command {
         this.taskManagementRepository = taskManagementRepository;
     }
 
-    public String execute(List<String> parameters){
+    public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         parseParameters(parameters);
@@ -42,7 +42,7 @@ public class CreateNewFeedback implements Command {
         title = parameters.get(1);
         description = parameters.get(0);
         status = ParsingHelpers.tryParseEnum(parameters.get(2), Status.class);
-        rating=Integer.parseInt(parameters.get(3));
+        rating = Integer.parseInt(parameters.get(3));
 
     }
 }

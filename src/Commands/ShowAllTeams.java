@@ -11,20 +11,21 @@ import java.util.List;
 public class ShowAllTeams implements Command {
     public static final int EXPECTED_NUMBER_OF_PARAMETERS = 0;
     private List<Team> teams;
+
     public ShowAllTeams(TaskManagementRepository taskManagementRepository) {
         teams = taskManagementRepository.getTeams();
     }
 
     @Override
     public String execute(List<String> parameters) {
-        if(parameters.size()!=EXPECTED_NUMBER_OF_PARAMETERS){
+        if (parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS) {
             throw new IllegalArgumentException("The parameters shuold ");
         }
         List<String> teamsName = new ArrayList<>();
-        if (teams.isEmpty()){
+        if (teams.isEmpty()) {
             return "There are no teams listed";
         }
-        for (Team teams: teams) {
+        for (Team teams : teams) {
             teamsName.add(teams.getName());
         }
         return teamsName.toString();

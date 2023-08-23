@@ -16,6 +16,7 @@ public class CreateNewTeam implements Command {
     public static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
     private String name;
     private TaskManagementRepository taskManagementRepository;
+
     public CreateNewTeam(Core.Contracts.TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
@@ -27,7 +28,8 @@ public class CreateNewTeam implements Command {
         Team createdNewTeam = taskManagementRepository.createNewTeam(name);
         return String.format("Team with name: %s was created.", createdNewTeam.getName());
     }
-    private void parseParameters(List<String> parameters){
+
+    private void parseParameters(List<String> parameters) {
         this.name = parameters.get(0);
     }
 }

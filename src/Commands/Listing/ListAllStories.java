@@ -22,7 +22,7 @@ public class ListAllStories implements Command {
     private List<Story> filteredStories;
     private List<Story> stories;
 
-    public ListAllStories(TaskManagementRepository taskManagementRepository){
+    public ListAllStories(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
 
@@ -31,40 +31,40 @@ public class ListAllStories implements Command {
     public String execute(List<String> parameters) {
         stories = getStoriesFromTasks(taskManagementRepository.getTasks());
 
-        if(stories.isEmpty()){
+        if (stories.isEmpty()) {
             return "There are no registered stories.";
         }
 
-        if(parameters.size()==0){
+        if (parameters.size() == 0) {
             return stories.toString();
-        }else if(parameters.size()==2){
+        } else if (parameters.size() == 2) {
             return sortStories(parameters);
-        }else if(parameters.size()==3){
+        } else if (parameters.size() == 3) {
             return filterStories(parameters);
         }
 
         return stories.toString();
     }
 
-    private List<Story> getStoriesFromTasks(List<Task> tasks){
+    private List<Story> getStoriesFromTasks(List<Task> tasks) {
         List<Story> stories = new ArrayList<>();
-        for (Task task:tasks) {
-            if(task instanceof Story){
+        for (Task task : tasks) {
+            if (task instanceof Story) {
                 stories.add((Story) task);
             }
         }
         return stories;
     }
 
-    private String filterStories(List<String> parameters){
-        if (parameters.get(0).equals("filter")){
-            if(parameters.get(1).equals("Status")){
+    private String filterStories(List<String> parameters) {
+        if (parameters.get(0).equals("filter")) {
+            if (parameters.get(1).equals("Status")) {
                 filteredStories = stories.stream()
                         .filter(story -> story.getStatus().equals(ParsingHelpers.tryParseEnum(parameters.get(2), Status.class)))
                         .collect(Collectors.toList());
                 return filteredStories.toString();
             }
-            if(parameters.get(1).equals("Assignee")){
+            if (parameters.get(1).equals("Assignee")) {
                 filteredStories = stories.stream()
                         .filter(story -> story.getAssignee().equals(parameters.get(2)))
                         .collect(Collectors.toList());
@@ -74,21 +74,21 @@ public class ListAllStories implements Command {
         return "Wrong command";
     }
 
-    private String sortStories(List<String> parameters){
-        if (parameters.get(0).equals("sort")){
-            if(parameters.get(1).equals("Title")){
+    private String sortStories(List<String> parameters) {
+        if (parameters.get(0).equals("sort")) {
+            if (parameters.get(1).equals("Title")) {
                 List<Story> sortedStories = stories.stream()
                         .sorted(Comparator.comparing(Story::getTitle))
                         .collect(Collectors.toList());
                 return sortedStories.toString();
             }
-            if(parameters.get(1).equals("Priority")){
+            if (parameters.get(1).equals("Priority")) {
                 List<Story> sortedStories = stories.stream()
                         .sorted(Comparator.comparing(Story::getPriority))
                         .collect(Collectors.toList());
                 return sortedStories.toString();
             }
-            if(parameters.get(1).equals("Size")){
+            if (parameters.get(1).equals("Size")) {
                 List<Story> sortedStories = stories.stream()
                         .sorted(Comparator.comparing(Story::getSize))
                         .collect(Collectors.toList());

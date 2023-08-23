@@ -20,7 +20,7 @@ public class TaskImpl {
     private List<String> comments;
     private List<String> historyChanges;
 
-    public TaskImpl(int id, String title, String description, Status status ) {
+    public TaskImpl(int id, String title, String description, Status status) {
         Id = id;
         setTitle(title);
         setDescription(description);
@@ -67,7 +67,7 @@ public class TaskImpl {
         return new ArrayList<>(comments);
     }
 
-    public void addComment(String comment){
+    public void addComment(String comment) {
         this.comments.add(comment);
     }
 
@@ -75,7 +75,7 @@ public class TaskImpl {
         return new ArrayList<>(historyChanges);
     }
 
-    public void addHistoryChange(String historyChange){
+    public void addHistoryChange(String historyChange) {
         this.historyChanges.add(historyChange);
     }
 }

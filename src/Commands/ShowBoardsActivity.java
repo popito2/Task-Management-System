@@ -13,7 +13,7 @@ public class ShowBoardsActivity implements Command {
     private String name;
     private TaskManagementRepository taskManagementRepository;
 
-    public ShowBoardsActivity(TaskManagementRepository taskManagementRepository){
+    public ShowBoardsActivity(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
 
@@ -24,7 +24,7 @@ public class ShowBoardsActivity implements Command {
         return history.toString();
     }
 
-    private List<String> getHistory(List<String> parameters){
+    private List<String> getHistory(List<String> parameters) {
         name = parameters.get(0);
         return taskManagementRepository.findBoardByName(name).getHistory();
     }

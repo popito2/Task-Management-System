@@ -12,7 +12,7 @@ public class ShowTeamsActivity implements Command {
     private String name;
     private TaskManagementRepository taskManagementRepository;
 
-    public ShowTeamsActivity(TaskManagementRepository taskManagementRepository){
+    public ShowTeamsActivity(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
 
@@ -23,7 +23,7 @@ public class ShowTeamsActivity implements Command {
         return history.toString();
     }
 
-    private List<List<String>> getHistory(List<String> parameters){
+    private List<List<String>> getHistory(List<String> parameters) {
         name = parameters.get(0);
         return taskManagementRepository.findTeamByName(name).getHistory();
     }

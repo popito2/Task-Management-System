@@ -36,7 +36,7 @@ public class Bug extends TaskImpl implements Models.Tasks.Interfaces.Bug {
         return assignee;
     }
 
-    public void setAssignee(String assignee){
+    public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
 
@@ -50,7 +50,7 @@ public class Bug extends TaskImpl implements Models.Tasks.Interfaces.Bug {
         }
     }
 
-    public void addListOfSteps(String step){
+    public void addListOfSteps(String step) {
         stepsToReproduce.add(step);
     }
 }

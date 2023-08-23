@@ -32,20 +32,20 @@ public class AssignATaskToAPerson implements Command {
 
         member.addTask((TaskImpl) task);
 
-        Bug bug = (Bug) taskManagementRepository.findTaskById( ParsingHelpers.tryParseInt(parameters.get(0),"id"));
+        Bug bug = (Bug) taskManagementRepository.findTaskById(ParsingHelpers.tryParseInt(parameters.get(0), "id"));
 
         bug.setAssignee(memberName);
 
         return String.format("%s has been added to team %s", memberName, taskId);
     }
 
-        private Task getTask(List<String> parameters){
-        taskId = ParsingHelpers.tryParseInt(parameters.get(0),"id");
-            Task task = taskManagementRepository.findTaskById(taskId);
-            return task;
+    private Task getTask(List<String> parameters) {
+        taskId = ParsingHelpers.tryParseInt(parameters.get(0), "id");
+        Task task = taskManagementRepository.findTaskById(taskId);
+        return task;
     }
 
-    private Member getMember(List<String> parameters){
+    private Member getMember(List<String> parameters) {
         memberName = parameters.get(1);
         return new Models.Member(memberName);
     }
