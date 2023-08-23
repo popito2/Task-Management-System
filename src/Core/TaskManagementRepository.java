@@ -46,7 +46,7 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
 
     public Models.Tasks.Interfaces.Bug createNewBug(String title, String description, Status status,
                                                     Priority priority, Severity severity) {
-        Models.Tasks.Interfaces.Bug bug = new Bug(++nextId, title, description, status, priority, severity );
+        Models.Tasks.Interfaces.Bug bug = new Bug(++nextId, title, description, status, priority, severity);
         tasks.add(bug);
         return bug;
     }
@@ -98,18 +98,18 @@ public class TaskManagementRepository implements Core.Contracts.TaskManagementRe
         throw new IllegalArgumentException("Team not found.");
     }
 
-    public Models.interfaces.Member findMemberByName(String name){
-        for (Models.interfaces.Member member : members){
-            if(member.getName().equals(name)){
+    public Models.interfaces.Member findMemberByName(String name) {
+        for (Models.interfaces.Member member : members) {
+            if (member.getName().equals(name)) {
                 return member;
             }
         }
         throw new IllegalArgumentException("Member not found");
     }
 
-    public Board findBoardByName(String name){
-        for (Board board : boards){
-            if(board.getName().equals(name)){
+    public Board findBoardByName(String name) {
+        for (Board board : boards) {
+            if (board.getName().equals(name)) {
                 return board;
             }
         }

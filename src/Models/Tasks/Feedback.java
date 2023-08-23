@@ -9,15 +9,17 @@ public class Feedback extends TaskImpl implements Models.Tasks.Interfaces.Feedba
         super(id, title, description, status);
         this.rating = rating;
     }
+
     private void setRating(int rating) {
         this.rating = rating;
     }
+
     public int getRating() {
         return rating;
     }
 
-    public void advanceFeedback(){
-        switch(getStatus()){
+    public void advanceFeedback() {
+        switch (getStatus()) {
             case NEW:
                 setStatus(Status.UNSCHEDULED);
                 break;
@@ -31,8 +33,8 @@ public class Feedback extends TaskImpl implements Models.Tasks.Interfaces.Feedba
     }
 
 
-    public void revertFeedback(){
-        switch(getStatus()){
+    public void revertFeedback() {
+        switch (getStatus()) {
             case DONE:
                 setStatus(Status.SCHEDULED);
                 break;

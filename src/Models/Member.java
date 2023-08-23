@@ -49,7 +49,7 @@ public class Member implements Models.interfaces.Member {
 
     }
 
-    public void addHistory(String history){
+    public void addHistory(String history) {
         historyChanges.add(history);
     }
 }

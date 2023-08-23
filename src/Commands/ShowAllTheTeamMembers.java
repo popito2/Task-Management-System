@@ -11,7 +11,7 @@ import java.util.List;
 public class ShowAllTheTeamMembers implements Command {
     public static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
     private String name;
-    private TaskManagementRepository taskManagementRepository ;
+    private TaskManagementRepository taskManagementRepository;
 
     public ShowAllTheTeamMembers(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
@@ -22,8 +22,9 @@ public class ShowAllTheTeamMembers implements Command {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
         return getTeam(parameters).getMembers().toString();
     }
-    private Team getTeam(List<String>parameters){
-        name=parameters.get(0);
+
+    private Team getTeam(List<String> parameters) {
+        name = parameters.get(0);
         return taskManagementRepository.findTeamByName(name);
     }
 }

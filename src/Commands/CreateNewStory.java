@@ -21,6 +21,7 @@ public class CreateNewStory implements Command {
     private String assignee;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS = 5;
     private TaskManagementRepository taskManagementRepository;
+
     public CreateNewStory(Core.Contracts.TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
@@ -32,7 +33,8 @@ public class CreateNewStory implements Command {
         Story createdStory = taskManagementRepository.createNewStory(title, description, priority, size, status);
         return String.format("Task with ID %d was created.", createdStory.getId());
     }
-    private void parseParameters(List<String> parameters){
+
+    private void parseParameters(List<String> parameters) {
         title = parameters.get(1);
         description = parameters.get(0);
         priority = ParsingHelpers.tryParseEnum(parameters.get(2), Priority.class);

@@ -21,7 +21,7 @@ public class AddPersonToTeam implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        if(parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS){
+        if (parameters.size() != EXPECTED_NUMBER_OF_PARAMETERS) {
             throw new IllegalArgumentException("Number of parameters should be 2");
         }
 
@@ -33,12 +33,12 @@ public class AddPersonToTeam implements Command {
         return String.format("%s has been added to team %s", memberName, teamName);
     }
 
-    private Models.interfaces.Team getTeam(List<String> parameters){
+    private Models.interfaces.Team getTeam(List<String> parameters) {
         teamName = parameters.get(0);
         return new Team(teamName);
     }
 
-    private Member getMember(List<String> parameters){
+    private Member getMember(List<String> parameters) {
         memberName = parameters.get(1);
         return new Models.Member(memberName);
     }

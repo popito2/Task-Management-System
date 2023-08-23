@@ -23,11 +23,11 @@ public class AddStepsToABug implements Command {
         return getSteps(parameters).getStepsToReproduce().toString();
     }
 
-    private Bug getSteps(List<String> parameters){
+    private Bug getSteps(List<String> parameters) {
         id = ParsingHelpers.tryParseInt(parameters.get(0), "id");
         Bug bug = (Bug) taskManagementRepository.findTaskById(id);
 
-        for(int i = 1; i<parameters.size(); i++){
+        for (int i = 1; i < parameters.size(); i++) {
             bug.addListOfSteps(parameters.get(i));
         }
         return bug;

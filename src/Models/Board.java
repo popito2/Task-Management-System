@@ -18,12 +18,14 @@ public class Board implements Models.interfaces.Board {
     public Board(String name) {
         setName(name);
     }
+
     protected void setName(String name) {
-        if(name.length()<MIN_NAME_LENGTH || name.length()>MAX_NAME_LENGTH){
+        if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
         }
         this.name = name;
     }
+
     public void addHistoryEntry(String entry) {
         history.add(entry);
     }
@@ -50,11 +52,13 @@ public class Board implements Models.interfaces.Board {
         this.tasks.add((Task) task);
 
     }
+
     @Override
     public void removeTask(TaskImpl task) {
         this.tasks.remove(task);
 
     }
+
     @Override
     public void addHistory(String history) {
         this.history.add(history);

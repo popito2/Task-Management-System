@@ -27,21 +27,21 @@ public class ListAllTasksWithAssignee implements Command {
         if (tasksWithAssignee.isEmpty()) {
             return "No tasks found.";
         }
-        if(parameters.size()==0){
+        if (parameters.size() == 0) {
             return ListingHelpers.elementsToString(tasksWithAssignee);
-        }else if(parameters.size()==1){
+        } else if (parameters.size() == 1) {
             return sortTasksWithAssignee(parameters);
-        }else if(parameters.size()==3){
+        } else if (parameters.size() == 3) {
             return filterTasksWithAssignee(parameters);
         }
 
         return ListingHelpers.elementsToString(tasksWithAssignee);
     }
 
-    public List<Task>filterTasks(List<Task>tasks){
-        List<Task>tasksWithAssignee = new ArrayList<>();
-        for (Task task:tasks) {
-            if(task instanceof Bug || task instanceof Story){
+    public List<Task> filterTasks(List<Task> tasks) {
+        List<Task> tasksWithAssignee = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof Bug || task instanceof Story) {
                 tasksWithAssignee.add(task);
             }
 
@@ -49,7 +49,7 @@ public class ListAllTasksWithAssignee implements Command {
         return tasksWithAssignee;
     }
 
-    private String filterTasksWithAssignee(List<String> parameters){
+    private String filterTasksWithAssignee(List<String> parameters) {
         if (parameters.get(0).equals("filter")) {
             if (parameters.get(1).equals("status")) {
                 List<Task> filteredByStatus = tasks.stream()
@@ -61,8 +61,8 @@ public class ListAllTasksWithAssignee implements Command {
         return "Wrong command";
     }
 
-    private String sortTasksWithAssignee(List<String> parameters){
-        if(parameters.get(0).equals("sort")){
+    private String sortTasksWithAssignee(List<String> parameters) {
+        if (parameters.get(0).equals("sort")) {
             List<Task> sortedTasks = tasks.stream().sorted(Comparator.comparing(task -> task.getTitle())).collect(Collectors.toList());
             return sortedTasks.toString();
         }

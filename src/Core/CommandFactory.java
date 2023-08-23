@@ -13,7 +13,7 @@ public class CommandFactory implements Core.Contracts.CommandFactory {
 
     public Command createCommandFromCommandName(String commandName, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandName, CommandType.class);
-        switch (commandType){
+        switch (commandType) {
             case CREATENEWBOARDINATEAM:
                 return new CreateANewBoardInATeam(taskManagementRepository);
             case CREATENEWBUG:
